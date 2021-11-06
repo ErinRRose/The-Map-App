@@ -3,22 +3,22 @@ class PreferencesController < ApplicationController
 
   # GET /preferences
   def index
-    @preferences = Preference.all
+    preferences = Preference.all
 
-    render json: @preferences
+    render json: preferences
   end
 
   # GET /preferences/1
   def show
-    render json: @preference
+    render json: preference
   end
 
   # POST /preferences
   def create
-    @preference = Preference.new(preference_params)
+    preference = Preference.new(preference_params)
 
-    if @preference.save
-      render json: @preference, status: :created, location: @preference
+    if preference.save
+      render json: @preference, status: :created, location: preference
     else
       render json: @preference.errors, status: :unprocessable_entity
     end
@@ -26,22 +26,22 @@ class PreferencesController < ApplicationController
 
   # PATCH/PUT /preferences/1
   def update
-    if @preference.update(preference_params)
-      render json: @preference
+    if preference.update(preference_params)
+      render json: preference
     else
-      render json: @preference.errors, status: :unprocessable_entity
+      render json: preference.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /preferences/1
   def destroy
-    @preference.destroy
+    preference.destroy
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_preference
-      @preference = Preference.find(params[:id])
+      preference = Preference.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
