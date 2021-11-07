@@ -12,3 +12,15 @@
 {
 
 }
+
+.pref-none {
+    background-color: white;
+}
+
+.pref-goto {
+    fill: #008a8a !important;
+}
+
+.pref-beento {
+    fill: #00008b !important;
+}
