@@ -1,0 +1,14 @@
+.container {
+    display: none;
+}
+
+#login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.g-signin2
+{
+
+}

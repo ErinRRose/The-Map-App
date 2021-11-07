@@ -1,0 +1,31 @@
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Map App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="1084528071422-8efe9hhspdustu7kup5bmhjv4lcnuf9r.apps.googleusercontent.com">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" async defer></script>
+</head>
+<body>
+
+    <div id="login-container" class="container">
+        <div class="g-signin2" data-onsuccess="Google_signIn"></div>
+    </div>
+
+    <div id="countries-container" class="container">
+        <div id="username"></div>
+    </div>
+
+    <script src="src/login.js"></script>
+    <script src="src/country.js"></script>
+    <script src="src/preference.js"></script>
+    <script src="src/userService.js"></script>
+    <script src="src/countryService.js"></script>
+    <script src="src/preferenceService.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
