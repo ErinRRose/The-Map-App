@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       if user == nil
       user = User.new(user_params)
       end
-
+    
     if user.save
       render json: user, status: :created, location: user
     else

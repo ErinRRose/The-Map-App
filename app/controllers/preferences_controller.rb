@@ -3,9 +3,9 @@ class PreferencesController < ApplicationController
 
   # GET /preferences
   def index
-    preferences = Preference.all
-
-    render json: preferences
+    
+    preferences = Preference.where(user_id: params[:user_id])
+     render json: preferences
   end
 
   # GET /preferences/1
@@ -18,14 +18,15 @@ class PreferencesController < ApplicationController
     preference = Preference.new(preference_params)
 
     if preference.save
-      render json: @preference, status: :created, location: preference
+      render json: preference, status: :created, location: preference
     else
-      render json: @preference.errors, status: :unprocessable_entity
+      render json: preference.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /preferences/1
   def update
+    preference = Preference.find(params[:id])
     if preference.update(preference_params)
       render json: preference
     else
@@ -35,6 +36,7 @@ class PreferencesController < ApplicationController
 
   # DELETE /preferences/1
   def destroy
+    preference = Preference.find(params[:id])
     preference.destroy
   end
 
@@ -46,6 +48,6 @@ class PreferencesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def preference_params
-      params.require(:preference).permit(:go_to, :been_to, :user_id)
+      params.require(:preference).permit(:status, :user_id, :country_id)
     end
 end

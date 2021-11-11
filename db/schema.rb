@@ -20,11 +20,12 @@ ActiveRecord::Schema.define(version: 2021_11_05_024548) do
   end
 
   create_table "preferences", force: :cascade do |t|
-    t.string "go_to"
-    t.string "been_to"
+    t.string "status"
     t.integer "user_id", null: false
+    t.integer "country_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["country_id"], name: "index_preferences_on_country_id"
     t.index ["user_id"], name: "index_preferences_on_user_id"
   end
 
@@ -35,5 +36,6 @@ ActiveRecord::Schema.define(version: 2021_11_05_024548) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "preferences", "countries"
   add_foreign_key "preferences", "users"
 end

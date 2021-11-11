@@ -9,3 +9,6 @@ else {
     $("#countries-container").show();
     start();
 }
+
+var countryList = null 
+var preferenceList = null
