@@ -11,6 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="lib/jquery.vmap.js"></script>
     <script src="lib/jquery.vmap.world.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -20,9 +21,12 @@
 
     <div id="countries-container" class="container">
         <div id="username"></div>
-        <div id="vmap" style="width: 600px; height: 400px;"></div>
+        <div id="vmap" style="width: 1000px; height: 800px;"></div>
     </div>
-
+    <div id="info"> 
+        
+        <div><i class="fa fa-plane"></i><span style="color: #008a8a">GREEN</span> is where you want to go and <span style="color: #00008b">BLUE</span> shows where you've been</div>
+    </div>
     <script src="src/login.js"></script>
     <script src="src/country.js"></script>
     <script src="src/preference.js"></script>
