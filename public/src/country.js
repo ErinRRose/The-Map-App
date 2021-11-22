@@ -1,12 +1,28 @@
+class Country {
 
+    
+    static all = []
+    constructor({id, name, iso_code}){
+        this.name = name
+        this.iso_code = iso_code
+        this.id = id
 
-function start() {
-    $("#username").text(currentUser.name);
+        Country.all.push(this)
+    }
+
+        static findId(code) {
+            return Country.all.find(p => p.iso_code == code.toUpperCase()).id;
+        }
+
+        static fetchAll() {
+        $("#username").text(currentUser.name);
 
     // fetch country list to match id with iso code for storage in preferences
      fetch('/countries')
      .then(res => res.json())
-     .then(data => countryList = data);
+     .then(data => data.forEach(element => {new Country(element);
+         
+     }));
 
         $('#vmap').vectorMap({
             map: 'world_en',
@@ -22,7 +38,7 @@ function start() {
             onLoad: function(event, map)
          {
             $('.jqvmap-region').addClass('perf-none');
-        },
+         },
         // onLabelShow: function(event, label, code)
         // {
 
@@ -48,7 +64,7 @@ function start() {
                     let pref = {
                         status: "goto",
                         user_id: currentUser.id,
-                        country_id: countryList.find(p => p.iso_code == code.toUpperCase()).id
+                        country_id: Country.findId(code)
                     };
 
                     fetch('/preferences', {
@@ -70,8 +86,7 @@ function start() {
                     // regionEle.addClass('perf-beento');
                     // $('#vmap').vectorMap('set', 'colors', {[code]: '#00008b'})
                     regionEle.removeClass('perf-goto');
-                  let countryId = countryList.find(p => p.iso_code == code.toUpperCase()).id;
-                    let pref =  preferenceList.find(p => p.country_id == countryId);
+                    let pref =  preferenceList.find(p => p.country_id == Country.findId(code));
                     let patch = {
                         status: "beento"
                     };
@@ -94,8 +109,7 @@ function start() {
                     // regionEle.addClass('perf-none');
                     // $('#vmap').vectorMap('set', 'colors', {[code]: '#ffffff'})
                     regionEle.removeClass('perf-beento');
-                  let countryId = countryList.find(p => p.iso_code == code.toUpperCase()).id;
-                    let pref =  preferenceList.find(p => p.country_id == countryId);
+                    let pref =  preferenceList.find(p => p.country_id == Country.findId(code));
                     fetch(`/preferences/${pref.id}`, {
                         method:'DELETE',
                         headers: {
@@ -118,4 +132,5 @@ function start() {
         });
         
        
+}
 }

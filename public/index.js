@@ -7,8 +7,8 @@ if(currentUser == null )
 }
 else {
     $("#countries-container").show();
-    start();
+    Country.fetchAll();
 }
 
-var countryList = null 
+ 
 var preferenceList = null
