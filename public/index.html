@@ -16,7 +16,8 @@
 <body>
 
     <div id="login-container" class="container">
-        <div class="g-signin2" data-onsuccess="Google_signIn"></div>
+        <div  id="login" class="g-signin2" data-onsuccess="Google_signIn"></div>
+        <div id="logout"><button onclick="logout()">Logout</button></div>
     </div>
 
     <div id="countries-container" class="container">
@@ -25,7 +26,7 @@
     </div>
     <div id="info"> 
         
-        <div><i class="fa fa-plane"></i><span style="color: #008a8a">GREEN</span> is where you want to go and <span style="color: #00008b">BLUE</span> shows where you've been</div>
+        <div><i class="fa fa-plane"></i><span style="color: #008a8a">GREEN</span> shows where you want to go and <span style="color: #00008b">BLUE</span> shows where you've been</div>
     </div>
     <script src="src/login.js"></script>
     <script src="src/country.js"></script>

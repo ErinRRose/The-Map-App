@@ -19,9 +19,18 @@ function Google_signIn(googleUser) {
     }).then(resp => resp.json())
     .then(user => {
         sessionStorage.setItem("currentUser", JSON.stringify(user));
+        refresh();
         getPref(user.id);
     })
 
     
 }
 
+function logout() {
+    gapi.auth2.getAuthInstance().signOut()
+    .then(()=> {
+        sessionStorage.removeItem("currentUser");
+        refresh();
+    });
+    
+}

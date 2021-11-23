@@ -1,14 +1,22 @@
 
 //set current user global and show/hide ui
-var currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+ var currentUser = null;
+function refresh() {
+currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 if(currentUser == null )
 {
-    $("#login-container").show();
+    $("#login").show();
+    $("#logout").hide();
+    $("#countries-container").hide();
 }
 else {
+    $("#login").hide();
+    $("#logout").show();
     $("#countries-container").show();
     Country.fetchAll();
 }
+}
+ refresh();
 
- 
-var preferenceList = null
+var preferenceList = null;
+
