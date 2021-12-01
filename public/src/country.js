@@ -15,8 +15,8 @@ class Country {
         }
 
         static fetchAll() {
-        $("#username").text(currentUser.name);
-
+       // $("#username").text(currentUser.name);
+       document.getElementById('username').innerHTML = currentUser.name;
     // fetch country list to match id with iso code for storage in preferences
      fetch('/countries')
      .then(res => res.json())
@@ -37,7 +37,9 @@ class Country {
             normalizeFunction: 'polynomial',
             onLoad: function(event, map)
          {
-            $('.jqvmap-region').addClass('perf-none');
+            //$('.jqvmap-region').addClass('perf-none');
+            
+            addClass('.jqvmap-region','perf-none');
          },
         // onLabelShow: function(event, label, code)
         // {
@@ -55,11 +57,12 @@ class Country {
         {
             
 
-            let regionEle = $(`#jqvmap1_${code}`);
-
+            //let regionEle = $(`#jqvmap1_${code}`);
+            let selector = `#jqvmap1_${code}`
+                
                         
-                if (regionEle.hasClass('perf-none')) {
-                    regionEle.removeClass('perf-none');
+                if (hasClass(selector, 'perf-none')) {
+                    removeClass(selector, 'perf-none');
                   
                     let pref = {
                         status: "goto",
@@ -75,17 +78,17 @@ class Country {
                     body: JSON.stringify(pref)
                     }).then(resp => resp.json())
                     .then(p => {
-                        regionEle.addClass('perf-goto');
+                        addClass(selector,'perf-goto');
                         $('#vmap').vectorMap('set', 'colors', {[code]: '#008a8a'});
                         preferenceList.push(p);
                     })
                 }
     
-                else if (regionEle.hasClass('perf-goto')) {
+                else if (hasClass(selector,'perf-goto')) {
                     // regionEle.removeClass('perf-goto');
                     // regionEle.addClass('perf-beento');
                     // $('#vmap').vectorMap('set', 'colors', {[code]: '#00008b'})
-                    regionEle.removeClass('perf-goto');
+                    removeClass(selector, 'perf-goto');
                     let pref =  preferenceList.find(p => p.country_id == Country.findId(code));
                     let patch = {
                         status: "beento"
@@ -98,17 +101,17 @@ class Country {
                     body: JSON.stringify(patch)
                     }).then(resp => resp.json())
                     .then(p => {
-                        regionEle.addClass('perf-beento');
+                        addClass(selector, 'perf-beento');
                         $('#vmap').vectorMap('set', 'colors', {[code]: '#00008b'});
                         pref.status = "beento";
                     })
                 }
     
-                else if (regionEle.hasClass('perf-beento')) {
+                else if (hasClass(selector, 'perf-beento')) {
                     // regionEle.removeClass('perf-beento');
                     // regionEle.addClass('perf-none');
                     // $('#vmap').vectorMap('set', 'colors', {[code]: '#ffffff'})
-                    regionEle.removeClass('perf-beento');
+                    removeClass(selector,'perf-beento');
                     let pref =  preferenceList.find(p => p.country_id == Country.findId(code));
                     fetch(`/preferences/${pref.id}`, {
                         method:'DELETE',
@@ -117,7 +120,7 @@ class Country {
                     }
                     })
                     .then(p => {
-                        regionEle.addClass('perf-none');
+                        addClass(selector, 'perf-none');
                         $('#vmap').vectorMap('set', 'colors', {[code]: '#ffffff'});
                         preferenceList = preferenceList.filter(d => d.id != pref.id);
                     })
